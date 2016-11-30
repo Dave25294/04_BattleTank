@@ -25,6 +25,8 @@ private:
 								// the crosshair intersects the world
 	bool GetSightRayHitLocation(FVector& HitLocation) const; // return an OUT parameter, true if hit landscape
 
+	bool GetLookDirection(FVector2D, FVector&) const;
+
 	UPROPERTY(EditAnywhere)
 		float CrossHairXLocation = 0.5f;
 
