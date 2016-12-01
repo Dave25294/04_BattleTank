@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 
 
@@ -14,7 +15,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -45,15 +46,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	// if no solution found do nothing
 }
 
-void UTankAimingComponent::MoveBarrelTowards(UStaticMeshComponent* Barrel, FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(UTankBarrel* Barrel, FVector AimDirection)
 {
 	// calculate difference in angle of barrel from current position to desired position
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotation;
 
-	// use FRotator to rotate barrel to new position
-
-	// given a max elevation speed, and the frame time
-
+	Barrel->Elevate(5); // TODO remove magic number
 }
