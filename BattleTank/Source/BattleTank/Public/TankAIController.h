@@ -7,6 +7,9 @@
 
 class ATank;
 
+/**
+ * 
+ */
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
@@ -15,9 +18,9 @@ class BATTLETANK_API ATankAIController : public AAIController
 private:
 	virtual void BeginPlay() override;
 
-	virtual void Tick(float Deltaseconds) override;
-
-	ATank* GetControlledTank() const;
+	virtual void Tick(float DeltaSeconds) override;
 	
+	ATank* GetControlledTank() const;
+
 	ATank* GetPlayerTank() const;
 };
