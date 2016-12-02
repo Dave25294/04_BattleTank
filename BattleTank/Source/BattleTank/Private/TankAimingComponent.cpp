@@ -35,12 +35,16 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
+		false,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
+
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		MoveBarrelTowards(Barrel, AimDirection);
+		MoveBarrelTowards(AimDirection);
 		auto Time = GetWorld()->GetTimeSeconds();
 		UE_LOG(LogTemp, Warning, TEXT("%f: Aim Solution found"), Time);
 	}
@@ -52,12 +56,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	// if no solution found do nothing
 }
 
-void UTankAimingComponent::MoveBarrelTowards(UTankBarrel* Barrel, FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	// calculate difference in angle of barrel from current position to desired position
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotation;
 
-	Barrel->Elevate(5); // TODO remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch); // TODO remove magic number
 }
