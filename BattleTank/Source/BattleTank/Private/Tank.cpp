@@ -17,6 +17,12 @@ ATank::ATank()
 	UE_LOG(LogTemp, Warning, TEXT("Constructor called"))
 }
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	UE_LOG(LogTemp, Warning, TEXT("Begin Play called"))
+}
+
 void ATank::AimAt(FVector HitLocation)
 {
 	if (!TankAimingComponent) { return; }
